@@ -15,5 +15,6 @@ public class LearnerResponse {
     private String code;
     private String rankName;
     private Long rankId;
-    private AccountResponse account;
+    private String accountName;
+    private Long accountId;
 }

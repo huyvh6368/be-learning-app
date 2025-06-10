@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import web.elearning.dto.request.QuestionRequest;
 import web.elearning.dto.response.QuestionResponse;
 import web.elearning.mapper.QuestionMapper;
+import web.elearning.model.Answer;
 import web.elearning.model.Question;
 import web.elearning.model.Topic;
+import web.elearning.repository.AnswerRepository;
 import web.elearning.repository.QuestionRepository;
 import web.elearning.repository.TopicRepository;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TopicRepository topicRepository;
+    private final AnswerRepository answerRepository;
 
     public QuestionResponse findById(Long id) {
         return QuestionMapper.entityToResponse(questionRepository.findById(id).orElseThrow(() ->
@@ -47,7 +50,8 @@ public class QuestionService {
     public QuestionResponse update(QuestionRequest request, Long id) {
         Topic topic = topicRepository.findById(request.getTopicId()).orElseThrow(() -> new RuntimeException("topic not found"));
         questionRepository.findById(id).orElseThrow(() -> new RuntimeException("question not found"));
-        Question question = questionRepository.save(QuestionMapper.addRequestToEntity(request, topic));
+        Answer answer = answerRepository.findById(id).orElseThrow(() -> new RuntimeException("answer not found"));
+        Question question = questionRepository.save(QuestionMapper.updateRequestToEntity(request, topic, answer, id));
         return QuestionMapper.entityToResponse(question);
     }
 }

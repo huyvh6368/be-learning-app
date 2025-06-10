@@ -34,7 +34,8 @@ public class LearnerMapper {
             learner.setRankName(entity.getRank().getName());
         }
         if (entity.getAccount() != null) {
-            learner.setAccount(AccountMapper.entityToResponse(entity.getAccount()));
+            learner.setAccountName(entity.getAccount().getName());
+            learner.setAccountId(entity.getAccount().getId());
         }
         learner.setTotalScore(entity.getTotalScore());
         return learner;

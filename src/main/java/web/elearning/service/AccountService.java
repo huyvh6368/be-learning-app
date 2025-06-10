@@ -34,7 +34,6 @@ public class AccountService {
         accountRepository.save(account);
         CustomUserDetail userDetails = new CustomUserDetail(account);
         var refreshToken = jwtService.generateRefreshToken(userDetails);
-        account.setRefreshToken(refreshToken);
         // init learner
         Learner learner = new Learner();
         learner.setAccount(account);
@@ -43,6 +42,8 @@ public class AccountService {
         learner.setTotalScore(0);
         learner.setName(account.getName());
         learnerRepository.save(learner);
+        account.setRefreshToken(refreshToken);
+        account.setLearner(learner);
         return AccountMapper.entityToResponse(accountRepository.save(account));
     }
 

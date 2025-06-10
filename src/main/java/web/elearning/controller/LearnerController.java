@@ -34,6 +34,15 @@ public class LearnerController {
                 null, null, null, null));
     }
 
+    @GetMapping("/findByAccount/{id}")
+    public ResponseEntity<?> findByAccount(@PathVariable Long id) {
+        LearnerResponse response = learnerService.findByAccountId(id);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "find by id success",
+                response,
+                null, null, null, null));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
         Page<LearnerResponse> response = learnerService.findAll(page, size);

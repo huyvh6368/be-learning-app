@@ -43,7 +43,8 @@ public class LevelService {
 
     public LevelResponse add(LevelRequest levelRequest) {
         Level level = LevelMapper.addToEntity(levelRequest);
-        return LevelMapper.entityToResponse(levelRepository.save(level));
+        levelRepository.save(level);
+        return LevelMapper.entityToResponse(level);
     }
 
     public LevelResponse update(LevelRequest levelRequest, Long id) {

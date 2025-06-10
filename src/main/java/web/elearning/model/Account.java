@@ -32,7 +32,7 @@ public class Account {
     private String refreshToken;
 
     @OneToOne(mappedBy = "account")
-    @JsonBackReference
+    @JsonManagedReference
     private Learner learner;
 }
 

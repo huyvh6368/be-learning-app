@@ -8,11 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import web.elearning.dto.request.LearnerRequest;
 import web.elearning.dto.response.LearnerResponse;
-import web.elearning.dto.response.RankResponse;
 import web.elearning.mapper.LearnerMapper;
-import web.elearning.mapper.RankMapper;
 import web.elearning.model.Learner;
-import web.elearning.model.Rank;
 import web.elearning.repository.LearnerRepository;
 
 import java.util.List;
@@ -31,6 +28,11 @@ public class LearnerService {
         return LearnerMapper
                 .entityToResponse(learnerRepository
                         .findById(id).orElseThrow(() -> new RuntimeException("learner not found")));
+    }
+
+    public LearnerResponse findByAccountId(Long id) {
+        Learner learner = learnerRepository.findByAccountId(id).orElseThrow(() -> new RuntimeException("learner not found"));
+        return LearnerMapper.entityToResponse(learner);
     }
 
     public Page<LearnerResponse> findAll(Integer page, Integer size) {

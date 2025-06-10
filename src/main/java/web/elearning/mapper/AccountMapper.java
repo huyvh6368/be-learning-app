@@ -31,6 +31,7 @@ public class AccountMapper {
         account.setId(entity.getId());
         account.setName(entity.getName());
         account.setEmail(entity.getEmail());
+        account.setLearnerResponse(LearnerMapper.entityToResponse(entity.getLearner()));
         account.setPhoneNumber(entity.getPhoneNumber());
         account.setRoles(entity.getRoles());
         return account;

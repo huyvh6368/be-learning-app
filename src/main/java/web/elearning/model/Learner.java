@@ -33,7 +33,7 @@ public class Learner {
 
     @OneToOne
     @JoinColumn(name = "account_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Account account;
 
     @OneToMany(mappedBy = "learner")

@@ -22,9 +22,9 @@ public class LevelMapper {
 
     public static LevelResponse entityToResponse(Level entity) {
         LevelResponse response = new LevelResponse();
-        entity.setId(entity.getId());
-        entity.setName(entity.getName());
-        entity.setDescribes(entity.getDescribes());
+        response.setId(entity.getId());
+        response.setName(entity.getName());
+        response.setDescribes(entity.getDescribes());
         return response;
     }
 }
