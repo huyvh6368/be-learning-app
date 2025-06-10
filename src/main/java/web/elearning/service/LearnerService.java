@@ -22,7 +22,7 @@ import java.util.List;
 public class LearnerService {
     private final LearnerRepository learnerRepository;
 
-    public LearnerResponse editLearner(LearnerRequest learnerRequest, Long id) {
+    public LearnerResponse update(LearnerRequest learnerRequest, Long id) {
         Learner learner = LearnerMapper.updateToLearner(learnerRequest, id);
         return LearnerMapper.entityToResponse(learnerRepository.save(learner));
     }

@@ -6,38 +6,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.elearning.dto.ResponseData;
-import web.elearning.dto.request.LevelRequest;
-import web.elearning.dto.response.LevelResponse;
-import web.elearning.service.LevelService;
+import web.elearning.dto.request.LearnerRequest;
+import web.elearning.dto.response.LearnerResponse;
+import web.elearning.service.LearnerService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/level")
-public class LevelController {
-    private final LevelService levelService;
+@RequestMapping("/api/learner")
+public class LearnerController {
+    private final LearnerService learnerService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody LevelRequest request) {
-        LevelResponse response = levelService.add(request);
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> edit(@PathVariable Long id, @RequestBody LearnerRequest request) {
+        LearnerResponse response = learnerService.update(request, id);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
-                "add success",
+                "edit success",
                 response,
                 null, null, null, null));
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<?> update(@RequestBody LevelRequest request, @PathVariable Long id) {
-        LevelResponse response = levelService.update(request, id);
+    @GetMapping("/find/{id}")
+    public ResponseEntity<?> show(@PathVariable Long id) {
+        LearnerResponse response = learnerService.getById(id);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
-                "add success",
+                "find by id success",
                 response,
                 null, null, null, null));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page,
-                                     @RequestParam(value = "size", required = false) Integer size) {
-        Page<LevelResponse> response = levelService.findAll(page, size);
+    public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
+        Page<LearnerResponse> response = learnerService.findAll(page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response.getContent(),

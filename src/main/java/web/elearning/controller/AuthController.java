@@ -27,7 +27,7 @@ public class AuthController {
         AccountResponse response = accountService.register(request);
         return ResponseEntity.ok(new ResponseData<>(
                 HttpStatus.OK.value(),
-                "Login Successfully !!",
+                "register Successfully !!",
                 response,
                 null, null, null, null));
     }

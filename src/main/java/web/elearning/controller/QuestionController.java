@@ -6,19 +6,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.elearning.dto.ResponseData;
-import web.elearning.dto.request.LevelRequest;
-import web.elearning.dto.response.LevelResponse;
-import web.elearning.service.LevelService;
+import web.elearning.dto.request.QuestionRequest;
+import web.elearning.dto.response.QuestionResponse;
+import web.elearning.service.QuestionService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/level")
-public class LevelController {
-    private final LevelService levelService;
+@RequestMapping("/api/question")
+public class QuestionController {
+    private final QuestionService questionService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody LevelRequest request) {
-        LevelResponse response = levelService.add(request);
+    public ResponseEntity<?> add(@RequestBody QuestionRequest request) {
+        QuestionResponse response = questionService.add(request);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "add success",
                 response,
@@ -26,21 +26,23 @@ public class LevelController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> update(@RequestBody LevelRequest request, @PathVariable Long id) {
-        LevelResponse response = levelService.update(request, id);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody QuestionRequest request) {
+        QuestionResponse response = questionService.update(request, id);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
-                "add success",
+                "edit success",
                 response,
                 null, null, null, null));
     }
 
     @GetMapping("/all")
     public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page,
-                                     @RequestParam(value = "size", required = false) Integer size) {
-        Page<LevelResponse> response = levelService.findAll(page, size);
+                                     @RequestParam(value = "size", required = false) Integer size,
+                                     @RequestParam(value = "topicId") Long topicId) {
+        Page<QuestionResponse> response = questionService.findAllByTopicId(topicId, page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response.getContent(),
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
     }
+
 }
