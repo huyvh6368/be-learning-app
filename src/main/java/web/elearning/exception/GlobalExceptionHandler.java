@@ -5,9 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import web.elearning.dto.ResponseError;
 
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -56,5 +58,15 @@ public class GlobalExceptionHandler {
             return element.getClassName() + " (line " + element.getLineNumber() + ")";
         }
         return "Unknown";
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<String> handleMaxSizeException(MaxUploadSizeExceededException exc) {
+        return ResponseEntity.badRequest().body("File size exceeds the maximum limit");
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<String> handleIOException(IOException exc) {
+        return ResponseEntity.badRequest().body(exc.getMessage());
     }
 }

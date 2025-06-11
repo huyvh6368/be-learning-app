@@ -42,7 +42,8 @@ public class SecurityConfig {
     String[] unAuth = {
             "/swagger-ui/index.html",
             "/api/v1/auth/**",
-            "/api/v1/email/**"
+            "/api/v1/email/**",
+            "/api/images/**"
     };
     String[] admin = {
             "/admin/**"
