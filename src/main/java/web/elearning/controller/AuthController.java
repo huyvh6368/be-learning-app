@@ -16,7 +16,7 @@ import web.elearning.dto.response.AccountResponse;
 import web.elearning.service.AccountService;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AccountService accountService;
