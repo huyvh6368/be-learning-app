@@ -13,4 +13,5 @@ public class AnswerResponse {
     private String name;
     private String questionName;
     private Long questionId;
+    private Boolean correct;
 }

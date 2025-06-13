@@ -19,6 +19,8 @@ public class Answer {
     @Column(columnDefinition = "TEXT")
     private String name;
 
+    private boolean correct;
+
     @ManyToOne
     @JoinColumn(name = "question_id")
     @JsonManagedReference

@@ -10,6 +10,8 @@ import web.elearning.dto.request.QuestionRequest;
 import web.elearning.dto.response.QuestionResponse;
 import web.elearning.service.QuestionService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/question")
@@ -35,14 +37,23 @@ public class QuestionController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page,
-                                     @RequestParam(value = "size", required = false) Integer size,
-                                     @RequestParam(value = "topicId") Long topicId) {
+    public ResponseEntity<?> findAllByIdTopic(@RequestParam(value = "0", required = false) Integer page,
+                                              @RequestParam(value = "size", required = false) Integer size,
+                                              @RequestParam(value = "topicId") Long topicId) {
         Page<QuestionResponse> response = questionService.findAllByTopicId(topicId, page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response.getContent(),
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> findAll(@RequestParam(value = "topicId") Long topicId) {
+        List<QuestionResponse> response = questionService.findAllByTopicId(topicId);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "find all success",
+                response,
+                null, null, null, null));
     }
 
 }

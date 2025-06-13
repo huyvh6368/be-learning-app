@@ -16,6 +16,4 @@ public class QuestionResponse {
     private Integer score;
     private String topicName;
     private Long topicId;
-    private Long answerId;
-    private String answerName;
 }

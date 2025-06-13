@@ -13,21 +13,20 @@ public class QuestionMapper {
         question.setTitle(request.getTitle());
         question.setImgUrl(request.getImgUrl());
         question.setDescribes(request.getDescribes());
-        question.setScore(request.getScore());
+        question.setScore(Integer.parseInt(request.getScore()));
         question.setTopic(topic);
-        question.setCorrectAnswer(null);
         return question;
     }
 
-    public static Question updateRequestToEntity(QuestionRequest request, Topic topic, Answer answer, Long id) {
+    public static Question updateRequestToEntity(QuestionRequest request, Topic topic, Long id) {
         Question question = new Question();
         question.setId(id);
         question.setCode(request.getCode());
         question.setTitle(request.getTitle());
-        question.setScore(request.getScore());
+        question.setScore(Integer.parseInt(request.getScore()));
         question.setImgUrl(request.getImgUrl());
         question.setTopic(topic);
-        question.setCorrectAnswer(answer);
+//        question.setCorrectAnswer(answer);
         question.setDescribes(request.getDescribes());
         return question;
     }
@@ -42,10 +41,10 @@ public class QuestionMapper {
         response.setDescribes(entity.getDescribes());
         response.setTopicId(entity.getTopic().getId());
         response.setTopicName(entity.getTopic().getName());
-        if (entity.getCorrectAnswer() != null) {
-            response.setAnswerId(entity.getCorrectAnswer().getId());
-            response.setAnswerName(entity.getCorrectAnswer().getName());
-        }
+//        if (entity.getCorrectAnswer() != null) {
+//            response.setAnswerId(entity.getCorrectAnswer().getId());
+//            response.setAnswerName(entity.getCorrectAnswer().getName());
+//        }
         return response;
     }
 }

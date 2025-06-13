@@ -1,7 +1,6 @@
 package web.elearning.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +36,11 @@ public class AnswerController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page,
-                                     @RequestParam(value = "size", required = false) Integer size,
-                                     @RequestParam(value = "questionId") Long questionId) {
+    public ResponseEntity<?> findAll(@RequestParam(value = "questionId") Long questionId) {
         List<AnswerResponse> response = answerService.findAllByQuestionId(questionId);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response,
                 null, null, null, null));
     }
-
 }

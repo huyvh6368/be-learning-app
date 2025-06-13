@@ -10,6 +10,8 @@ import web.elearning.dto.request.LevelRequest;
 import web.elearning.dto.response.LevelResponse;
 import web.elearning.service.LevelService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/level")
@@ -35,12 +37,24 @@ public class LevelController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page,
-                                     @RequestParam(value = "size", required = false) Integer size) {
+    public ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                     @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        System.out.println("page: " + page);
+        System.out.println("size: " + size);
         Page<LevelResponse> response = levelService.findAll(page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response.getContent(),
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll() {
+
+        List<LevelResponse> response = levelService.findAll();
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "find all success",
+                response,
+                null, null, null, null));
     }
 }

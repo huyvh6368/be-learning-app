@@ -42,16 +42,16 @@ public class QuestionService {
 
 
     public QuestionResponse add(QuestionRequest request) {
-        Topic topic = topicRepository.findById(request.getTopicId()).orElseThrow(() -> new RuntimeException("topic not found"));
+        Topic topic = topicRepository.findById(Long.parseLong(request.getTopicId())).orElseThrow(() -> new RuntimeException("topic not found"));
         Question question = questionRepository.save(QuestionMapper.addRequestToEntity(request, topic));
         return QuestionMapper.entityToResponse(question);
     }
 
     public QuestionResponse update(QuestionRequest request, Long id) {
-        Topic topic = topicRepository.findById(request.getTopicId()).orElseThrow(() -> new RuntimeException("topic not found"));
+        Topic topic = topicRepository.findById(Long.parseLong(request.getTopicId())).orElseThrow(() -> new RuntimeException("topic not found"));
         questionRepository.findById(id).orElseThrow(() -> new RuntimeException("question not found"));
-        Answer answer = answerRepository.findById(id).orElseThrow(() -> new RuntimeException("answer not found"));
-        Question question = questionRepository.save(QuestionMapper.updateRequestToEntity(request, topic, answer, id));
+//        Answer answer = answerRepository.findById(id).orElseThrow(() -> new RuntimeException("answer not found"));
+        Question question = questionRepository.save(QuestionMapper.updateRequestToEntity(request, topic, id));
         return QuestionMapper.entityToResponse(question);
     }
 }

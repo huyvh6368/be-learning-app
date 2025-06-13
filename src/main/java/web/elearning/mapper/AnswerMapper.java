@@ -9,8 +9,9 @@ public class AnswerMapper {
     public static Answer addRequestToEntity(AnswerRequest request, Question question) {
         Answer answer = new Answer();
         answer.setQuestion(question);
+        answer.setCorrect(request.getCorrect());
         answer.setName(request.getName());
-        answer.setCode(request.getCode());
+        answer.setCode("test");
         return answer;
     }
 
@@ -19,7 +20,8 @@ public class AnswerMapper {
         answer.setId(id);
         answer.setQuestion(question);
         answer.setName(request.getName());
-        answer.setCode(request.getCode());
+        answer.setCorrect(request.getCorrect());
+        answer.setCode("test");
         return answer;
     }
 
@@ -28,6 +30,7 @@ public class AnswerMapper {
         answerResponse.setId(answer.getId());
         answerResponse.setName(answer.getName());
         answerResponse.setCode(answer.getCode());
+        answerResponse.setCorrect(answer.isCorrect());
         answerResponse.setQuestionId(answer.getQuestion().getId());
         answerResponse.setQuestionName(answer.getQuestion().getTitle());
         return answerResponse;

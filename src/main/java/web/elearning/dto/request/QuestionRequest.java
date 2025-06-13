@@ -12,8 +12,7 @@ public class QuestionRequest {
     private String title;
     private String imgUrl;
     private String describes;
-    private Integer score;
-    private Long topicId;
-    private Long correctAnswerId;
+    private String score;
+    private String topicId;
 }
 
