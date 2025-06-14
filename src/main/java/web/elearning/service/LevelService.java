@@ -7,11 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import web.elearning.dto.request.LevelRequest;
-import web.elearning.dto.response.LearnerResponse;
 import web.elearning.dto.response.LevelResponse;
-import web.elearning.mapper.LearnerMapper;
 import web.elearning.mapper.LevelMapper;
-import web.elearning.model.Learner;
 import web.elearning.model.Level;
 import web.elearning.repository.LevelRepository;
 

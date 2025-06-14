@@ -35,6 +35,15 @@ public class AnswerController {
                 null, null, null, null));
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        answerService.delete(id);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "xóa thành công",
+                "xóa thành công",
+                null, null, null, null));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> findAll(@RequestParam(value = "questionId") Long questionId) {
         List<AnswerResponse> response = answerService.findAllByQuestionId(questionId);

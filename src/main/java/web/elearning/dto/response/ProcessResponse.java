@@ -9,8 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProcessResponse {
     private Long id;
-    private LearnerResponse learner;
-    private QuestionResponse question;
+    private String learnerName;
+    private String learnerId;
+    private String questionName;
+    private String questionId;
+    private String answerName;
+    private String answerId;
     private Integer score;
 }
 

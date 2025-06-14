@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CorrectAnswerRequest {
-    private String answerId;
-    private String questionId;
-    private String correctAnswer;
+public class LearnerTopicRequest {
+    private Long learnerId;
+    private Long topicId;
 }

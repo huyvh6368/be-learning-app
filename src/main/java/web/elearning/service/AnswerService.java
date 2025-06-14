@@ -34,8 +34,15 @@ public class AnswerService {
     public AnswerResponse update(AnswerRequest request, Long id) {
         Question question = questionRepository.findById(request.getQuestionId())
                 .orElseThrow(() -> new EntityNotFoundException("Question not found with id " + request.getQuestionId()));
-        Answer answer = answerRepository.save(AnswerMapper.addRequestToEntity(request, question));
+        Answer answer = answerRepository.save(AnswerMapper.updateRequestToEntity(request, question, id));
         return AnswerMapper.entityToResponse(answer);
+    }
+
+    public void delete(Long id) {
+        Answer answer = answerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Answer not found with id " + id));
+        answer.setQuestion(null);
+        answerRepository.save(answer);
+        answerRepository.delete(answer);
     }
 
     public List<AnswerResponse> findAllByQuestionId(Long id) {

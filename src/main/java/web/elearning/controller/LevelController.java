@@ -39,8 +39,6 @@ public class LevelController {
     @GetMapping("/all")
     public ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                      @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        System.out.println("page: " + page);
-        System.out.println("size: " + size);
         Page<LevelResponse> response = levelService.findAll(page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",

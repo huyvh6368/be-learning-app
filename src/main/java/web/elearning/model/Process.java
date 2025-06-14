@@ -24,6 +24,12 @@ public class Process {
     @JsonManagedReference
     private Question question;
 
+
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    @JsonManagedReference
+    private Answer answer;
+
     private Integer score;
 }
 

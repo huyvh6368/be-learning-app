@@ -47,6 +47,15 @@ public class QuestionController {
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
     }
 
+    @GetMapping("/find/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        QuestionResponse response = questionService.findById(id);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "edit success",
+                response,
+                null, null, null, null));
+    }
+
     @GetMapping("/list")
     public ResponseEntity<?> findAll(@RequestParam(value = "topicId") Long topicId) {
         List<QuestionResponse> response = questionService.findAllByTopicId(topicId);
