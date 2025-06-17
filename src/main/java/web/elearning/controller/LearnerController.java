@@ -44,7 +44,8 @@ public class LearnerController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(@RequestParam(value = "0", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
+    public ResponseEntity<?> findAll(@RequestParam(value = "page", required = false) Integer page,
+                                     @RequestParam(value = "size", required = false) Integer size) {
         Page<LearnerResponse> response = learnerService.findAll(page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",

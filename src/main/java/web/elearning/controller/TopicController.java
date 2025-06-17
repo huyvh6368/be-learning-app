@@ -10,6 +10,8 @@ import web.elearning.dto.request.TopicRequest;
 import web.elearning.dto.response.TopicResponse;
 import web.elearning.service.TopicService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/topic")
@@ -42,5 +44,14 @@ public class TopicController {
                 "find all success",
                 response.getContent(),
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
+    }
+
+    @GetMapping("/find-all/{id}")
+    public ResponseEntity<?> all(@PathVariable Long id) {
+        List<TopicResponse> response = topicService.findAllByLevelId(id);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "find all success",
+                response,
+                null, null, null, null));
     }
 }

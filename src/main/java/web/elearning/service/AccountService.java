@@ -17,6 +17,8 @@ import web.elearning.repository.AccountRepository;
 import web.elearning.repository.LearnerRepository;
 import web.elearning.security.CustomUserDetail;
 
+import java.math.BigDecimal;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +31,12 @@ public class AccountService {
 
     // handler register
     public AccountResponse register(AccountRequest request) {
+        Boolean checkMail = accountRepository.existsByEmail(request.getEmail());
+        if (checkMail) {
+            throw new RuntimeException("Email already exists");
+        }
         String password = passwordEncoder.encode(request.getPassword());
-        Account account = AccountMapper.addRequestToEntity(request);
+        Account account = AccountMapper.addRequestToEntity(request, password);
         accountRepository.save(account);
         CustomUserDetail userDetails = new CustomUserDetail(account);
         var refreshToken = jwtService.generateRefreshToken(userDetails);
@@ -39,7 +45,7 @@ public class AccountService {
         learner.setAccount(account);
         learner.setCode("code");
         learner.setRank(null);
-        learner.setTotalScore(0);
+        learner.setTotalScore(BigDecimal.ZERO);
         learner.setName(account.getName());
         learnerRepository.save(learner);
         account.setRefreshToken(refreshToken);
@@ -63,6 +69,8 @@ public class AccountService {
         account.setRefreshToken(refreshToken);
         accountRepository.save(account);
         return JwtResponse.builder()
+                .accountEmail(account.getEmail())
+                .accountId(account.getId())
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -98,5 +106,14 @@ public class AccountService {
                 .accessToken(newAccessToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    public String editPassword(String email, String newPassword) {
+        String password = passwordEncoder.encode(newPassword);
+        Account account = accountRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        account.setPassword(password);
+        accountRepository.save(account);
+        return password;
     }
 }

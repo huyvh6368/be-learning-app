@@ -39,10 +39,6 @@ public class Question {
     @JsonBackReference
     private List<Answer> answers;
 
-    @OneToOne
-    @JoinColumn(name = "correct_answer_id")
-    private Answer correctAnswer;
-
     @OneToMany(mappedBy = "question")
     @JsonBackReference
     private List<Note> notes;

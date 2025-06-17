@@ -27,7 +27,7 @@ public class Level {
 
     @OneToMany(mappedBy = "level")
     @JsonBackReference
-    private List<LevelLearner> levelLearners;
+    private List<LearnerLevel> learnerLevels;
 
 }
 

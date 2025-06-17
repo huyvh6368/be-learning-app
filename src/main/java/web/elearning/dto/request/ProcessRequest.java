@@ -11,6 +11,5 @@ public class ProcessRequest {
     private Long learnerId;
     private Long questionId;
     private Long answerId;
-    private Integer score;
 }
 

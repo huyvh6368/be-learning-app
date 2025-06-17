@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Long> {
     Page<Topic> findAllByLevelId(Long levelId, Pageable pageable);
+
     List<Topic> findAllByLevelId(Long levelId);
 }

@@ -5,11 +5,11 @@ import web.elearning.dto.response.AccountResponse;
 import web.elearning.model.Account;
 
 public class AccountMapper {
-    public static Account addRequestToEntity(AccountRequest request) {
+    public static Account addRequestToEntity(AccountRequest request, String password) {
         Account account = new Account();
         account.setName(request.getName());
         account.setEmail(request.getEmail());
-        account.setPassword(request.getPassword());
+        account.setPassword(password);
         account.setPhoneNumber(request.getPhoneNumber());
         account.setRoles("USER");
         return account;

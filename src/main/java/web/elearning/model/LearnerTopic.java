@@ -15,11 +15,11 @@ public class LearnerTopic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "learner_id")
     private Learner learner;
 
-    @OneToOne
-    @JoinColumn(name = "learner_id")
+    @ManyToOne
+    @JoinColumn(name = "topic_id")
     private Topic topic;
 }

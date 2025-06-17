@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +17,6 @@ public class ProcessResponse {
     private String questionId;
     private String answerName;
     private String answerId;
-    private Integer score;
+    private BigDecimal score;
 }
 

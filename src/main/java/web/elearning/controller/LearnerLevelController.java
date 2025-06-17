@@ -6,21 +6,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.elearning.dto.ResponseData;
-import web.elearning.dto.request.LearnerTopicRequest;
-import web.elearning.dto.response.LearnerTopicResponse;
-import web.elearning.service.LearnerTopicService;
+import web.elearning.dto.request.LearnerLevelRequest;
+import web.elearning.dto.response.LearnerLevelResponse;
+import web.elearning.service.LearnerLevelService;
 
 @RestController
-
-@RequestMapping("/api/learner-topic")
 @RequiredArgsConstructor
-public class LearnerTopicController {
-    private final LearnerTopicService learnerTopicService;
+@RequestMapping("/api/learner-level")
+public class LearnerLevelController {
+    private final LearnerLevelService learnerLevelService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody LearnerTopicRequest request) {
-        System.out.println("learner id : "+request.getLearnerId()+"- ---- topic id : "+request.getTopicId());
-        learnerTopicService.add(request);
+    public ResponseEntity<?> add(@RequestBody LearnerLevelRequest request) {
+        learnerLevelService.add(request);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "add success",
                 "OK",
@@ -29,8 +27,8 @@ public class LearnerTopicController {
 
     @GetMapping("/check")
     public ResponseEntity<?> check(@RequestParam(value = "learnerId") Long learnerId,
-                                   @RequestParam(value = "topicId") Long topicId) {
-        Boolean response = learnerTopicService.existsByLearnerIdAndTopicId(learnerId, topicId);
+                                   @RequestParam(value = "levelId") Long levelId) {
+        Boolean response = learnerLevelService.checkLearnerLevel(learnerId, levelId);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response,
@@ -40,7 +38,7 @@ public class LearnerTopicController {
     @GetMapping("/all")
     public ResponseEntity<?> findAll(@RequestParam(value = "page", required = false) Integer page,
                                      @RequestParam(value = "size", required = false) Integer size) {
-        Page<LearnerTopicResponse> response = learnerTopicService.findAll(page, size);
+        Page<LearnerLevelResponse> response = learnerLevelService.findAll(page, size);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "find all success",
                 response.getContent(),

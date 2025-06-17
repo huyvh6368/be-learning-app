@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class JwtResponse {
+    private String accountEmail;
+    private Long accountId;
     private String accessToken;
     private String refreshToken;
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 // RankResponse.java
 @Data
 @NoArgsConstructor
@@ -11,5 +13,7 @@ import lombok.NoArgsConstructor;
 public class RankResponse {
     private Long id;
     private String name;
+    private BigDecimal minScore;
+    private BigDecimal maxScore;
     private String describes;
 }

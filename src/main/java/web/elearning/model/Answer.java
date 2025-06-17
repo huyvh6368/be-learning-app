@@ -19,7 +19,7 @@ public class Answer {
     @Column(columnDefinition = "TEXT")
     private String name;
 
-    private boolean correct;
+    private Boolean correct;
 
     @ManyToOne
     @JoinColumn(name = "question_id")

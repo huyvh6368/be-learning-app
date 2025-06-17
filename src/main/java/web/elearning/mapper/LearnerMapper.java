@@ -5,6 +5,8 @@ import web.elearning.dto.response.LearnerResponse;
 import web.elearning.model.Account;
 import web.elearning.model.Learner;
 
+import java.math.BigDecimal;
+
 public class LearnerMapper {
     public static Learner addToLearner(LearnerRequest request, Account account) {
         Learner learner = new Learner();
@@ -12,7 +14,7 @@ public class LearnerMapper {
         learner.setAccount(account);
         learner.setCode("learnerCODE");
         learner.setRank(null);
-        learner.setTotalScore(0);
+        learner.setTotalScore(new BigDecimal(request.getTotalScore()));
         return learner;
     }
 

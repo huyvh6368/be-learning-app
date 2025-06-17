@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import web.elearning.dto.request.QuestionRequest;
 import web.elearning.dto.response.QuestionResponse;
 import web.elearning.mapper.QuestionMapper;
-import web.elearning.model.Answer;
 import web.elearning.model.Question;
 import web.elearning.model.Topic;
 import web.elearning.repository.AnswerRepository;

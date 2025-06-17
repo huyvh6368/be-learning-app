@@ -30,7 +30,7 @@ public class AnswerMapper {
         answerResponse.setId(answer.getId());
         answerResponse.setName(answer.getName());
         answerResponse.setCode(answer.getCode());
-        answerResponse.setCorrect(answer.isCorrect());
+        answerResponse.setCorrect(answer.getCorrect());
         answerResponse.setQuestionId(answer.getQuestion().getId());
         answerResponse.setQuestionName(answer.getQuestion().getTitle());
         return answerResponse;

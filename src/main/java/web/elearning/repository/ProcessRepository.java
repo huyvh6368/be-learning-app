@@ -6,4 +6,7 @@ import web.elearning.model.Process;
 
 @Repository
 public interface ProcessRepository extends JpaRepository<Process, Long> {
+    Boolean existsByLearnerIdAndQuestionId(Long learnerId, Long questionId);
+
+    Process findByLearnerIdAndQuestionId(Long learnerId, Long questionId);
 }

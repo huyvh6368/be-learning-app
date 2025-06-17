@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 // LearnerResponse.java
 @Data
 @NoArgsConstructor
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class LearnerResponse {
     private Long id;
     private String name;
-    private Integer totalScore;
+    private BigDecimal totalScore;
     private String code;
     private String rankName;
     private Long rankId;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Learner {
     private Rank rank;
 
     @Column(name = "total_score")
-    private Integer totalScore = 0;
+    private BigDecimal totalScore;
 
     private String code;
 
@@ -38,7 +39,7 @@ public class Learner {
 
     @OneToMany(mappedBy = "learner")
     @JsonBackReference
-    private List<LevelLearner> levelLearners;
+    private List<LearnerLevel> learnerLevels;
 
     @OneToMany(mappedBy = "learner")
     @JsonBackReference

@@ -7,6 +7,8 @@ import web.elearning.model.Rank;
 public class RankMapper {
     public static Rank addRequestToEntity(RankRequest request) {
         Rank rank = new Rank();
+        rank.setMinScore(request.getMinScore());
+        rank.setMaxScore(request.getMaxScore());
         rank.setName(request.getName());
         rank.setDescribes(request.getDescribes());
         return rank;
@@ -15,6 +17,8 @@ public class RankMapper {
     public static Rank updateRequestToEntity(RankRequest request, Long id) {
         Rank rank = new Rank();
         rank.setId(id);
+        rank.setMinScore(request.getMinScore());
+        rank.setMaxScore(request.getMaxScore());
         rank.setName(request.getName());
         rank.setDescribes(request.getDescribes());
         return rank;
@@ -22,6 +26,8 @@ public class RankMapper {
 
     public static RankResponse entityToResponse(Rank entity) {
         RankResponse rank = new RankResponse();
+        rank.setMinScore(entity.getMinScore());
+        rank.setMaxScore(entity.getMaxScore());
         rank.setId(entity.getId());
         rank.setName(entity.getName());
         rank.setDescribes(entity.getDescribes());

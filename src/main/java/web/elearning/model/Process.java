@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "tbl_process")
 @Data
@@ -30,7 +32,7 @@ public class Process {
     @JsonManagedReference
     private Answer answer;
 
-    private Integer score;
+    private BigDecimal score;
 }
 
 

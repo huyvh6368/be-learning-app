@@ -51,6 +51,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<?> handleNumberFormatException(NumberFormatException ex) {
+        ResponseError error = new ResponseError(
+                HttpStatus.BAD_REQUEST.value(),
+                "Score không hợp lệ. Vui lòng nhập đúng định dạng số.",
+                LocalDateTime.now(),
+                ex.getMessage(),
+                getFilePath(ex)
+        );
+        return ResponseEntity.badRequest().body(error);
+    }
+
     private String getFilePath(Exception ex) {
         StackTraceElement[] stackTrace = ex.getStackTrace();
         if (stackTrace.length > 0) {

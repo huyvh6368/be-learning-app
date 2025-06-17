@@ -8,11 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import web.elearning.dto.request.RankRequest;
 import web.elearning.dto.response.RankResponse;
-import web.elearning.dto.response.TopicResponse;
 import web.elearning.mapper.RankMapper;
-import web.elearning.mapper.TopicMapper;
 import web.elearning.model.Rank;
-import web.elearning.model.Topic;
 import web.elearning.repository.RankRepository;
 
 import java.util.List;
