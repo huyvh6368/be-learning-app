@@ -26,6 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import web.elearning.security.CustomLogoutService;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,13 +50,13 @@ public class SecurityConfig {
             "/admin/**"
     };
 
-    @Value("${frontend.allowed-origins}")
-    private String allowedOrigins;
+    @Value("${frontend.urls}")
+    private String[] frontendUrls;
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(allowedOrigins.split(",")));
+        configuration.setAllowedOrigins(Arrays.asList(frontendUrls)); // hỗ trợ nhiều URL
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
