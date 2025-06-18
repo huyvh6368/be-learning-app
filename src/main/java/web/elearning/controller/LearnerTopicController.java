@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import web.elearning.dto.ResponseData;
 import web.elearning.dto.request.LearnerTopicRequest;
 import web.elearning.dto.response.LearnerTopicResponse;
+import web.elearning.dto.response.LevelResponse;
+import web.elearning.dto.response.TopicResponse;
 import web.elearning.service.LearnerTopicService;
+
+import java.util.List;
 
 @RestController
 
@@ -19,7 +23,7 @@ public class LearnerTopicController {
 
     @PostMapping("/add")
     public ResponseEntity<?> add(@RequestBody LearnerTopicRequest request) {
-        System.out.println("learner id : "+request.getLearnerId()+"- ---- topic id : "+request.getTopicId());
+        System.out.println("learner id : " + request.getLearnerId() + "- ---- topic id : " + request.getTopicId());
         learnerTopicService.add(request);
         return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
                 "add success",
@@ -45,5 +49,14 @@ public class LearnerTopicController {
                 "find all success",
                 response.getContent(),
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
+    }
+
+    @GetMapping("/findByLearner/{id}")
+    public ResponseEntity<?> getTopicsByLearner(@PathVariable Long id) {
+        List<TopicResponse> response = learnerTopicService.findAllTopicsByLearnerId(id);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "find all success",
+                response,
+                null, null, null, null));
     }
 }

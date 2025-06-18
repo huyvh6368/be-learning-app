@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import web.elearning.dto.JwtResponse;
-import web.elearning.dto.LoginRequest;
-import web.elearning.dto.RefreshTokenRequest;
-import web.elearning.dto.ResponseData;
+import web.elearning.dto.*;
 import web.elearning.dto.request.AccountRequest;
 import web.elearning.dto.response.AccountResponse;
 import web.elearning.service.AccountService;
@@ -39,6 +36,16 @@ public class AuthController {
         return ResponseEntity.ok(new ResponseData<>(
                 HttpStatus.OK.value(),
                 "Login Successfully !!",
+                response,
+                null, null, null, null));
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePass(@RequestBody PassWordRequest request) {
+        Boolean response = accountService.changePassword(request);
+        return ResponseEntity.ok(new ResponseData<>(
+                HttpStatus.OK.value(),
+                "Password change successful",
                 response,
                 null, null, null, null));
     }

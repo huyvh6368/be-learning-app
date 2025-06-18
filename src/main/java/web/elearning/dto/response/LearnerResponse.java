@@ -13,10 +13,12 @@ import java.math.BigDecimal;
 public class LearnerResponse {
     private Long id;
     private String name;
+    private String urlImage;
     private BigDecimal totalScore;
     private String code;
     private String rankName;
     private Long rankId;
     private String accountName;
+    private String accountEmail;
     private Long accountId;
 }

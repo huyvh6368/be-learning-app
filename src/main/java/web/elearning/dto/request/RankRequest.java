@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RankRequest {
     private String name;
-    private BigDecimal minScore;
-    private BigDecimal maxScore;
+    private BigDecimal score;
     private String describes;
 }

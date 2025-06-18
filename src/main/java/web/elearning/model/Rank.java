@@ -18,8 +18,9 @@ public class Rank {
     private Long id;
 
     private String name;
-    private BigDecimal minScore;
-    private BigDecimal maxScore;
+
+    private BigDecimal score;
+
     @Column(columnDefinition = "TEXT")
     private String describes;
 

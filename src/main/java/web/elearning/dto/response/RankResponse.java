@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 public class RankResponse {
     private Long id;
     private String name;
-    private BigDecimal minScore;
-    private BigDecimal maxScore;
+    private BigDecimal score;
     private String describes;
 }

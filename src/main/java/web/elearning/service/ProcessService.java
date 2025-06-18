@@ -6,17 +6,12 @@ import org.springframework.stereotype.Service;
 import web.elearning.dto.request.ProcessRequest;
 import web.elearning.dto.response.ProcessResponse;
 import web.elearning.mapper.ProcessMapper;
-import web.elearning.model.Answer;
-import web.elearning.model.Learner;
+import web.elearning.model.*;
 import web.elearning.model.Process;
-import web.elearning.model.Question;
-import web.elearning.repository.AnswerRepository;
-import web.elearning.repository.LearnerRepository;
-import web.elearning.repository.ProcessRepository;
-import web.elearning.repository.QuestionRepository;
+import web.elearning.repository.*;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +20,7 @@ public class ProcessService {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final ProcessRepository processRepository;
+    private final RankRepository rankRepository;
 
     public void add(ProcessRequest request) {
         Question question = questionRepository.findById(request.getQuestionId())
@@ -33,15 +29,22 @@ public class ProcessService {
                 .orElseThrow(() -> new EntityNotFoundException("Answer not found with id " + request.getAnswerId()));
         Learner learner = learnerRepository.findById(request.getLearnerId())
                 .orElseThrow(() -> new EntityNotFoundException("Learner not found with id " + request.getLearnerId()));
-
+        List<Rank> rankList = rankRepository.findAll();
         if (Boolean.TRUE.equals(answer.getCorrect())) {
             //if answer is true
             BigDecimal questionScore = new BigDecimal(question.getScore());
             Process process = ProcessMapper.addToEntity(learner, question, answer, questionScore);
             processRepository.save(process);
-            // update total score  for  learner
+
+            // update total score for learner
             BigDecimal totalScore = learner.getTotalScore().add(questionScore);
             learner.setTotalScore(totalScore);
+            // check rank
+            for (Rank rank : rankList) {
+                if (totalScore.compareTo(rank.getScore()) >= 0) {
+                    learner.setRank(rank);
+                }
+            }
             learnerRepository.save(learner);
 
         } else {
@@ -52,6 +55,11 @@ public class ProcessService {
             // update total score  for  learner
             BigDecimal totalScore = learner.getTotalScore().add(questionScore);
             learner.setTotalScore(totalScore);
+            for (Rank rank : rankList) {
+                if (totalScore.compareTo(rank.getScore()) >= 0) {
+                    learner.setRank(rank);
+                }
+            }
             learnerRepository.save(learner);
         }
 

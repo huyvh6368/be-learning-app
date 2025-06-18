@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.elearning.dto.JwtResponse;
 import web.elearning.dto.LoginRequest;
+import web.elearning.dto.PassWordRequest;
 import web.elearning.dto.RefreshTokenRequest;
 import web.elearning.dto.request.AccountRequest;
 import web.elearning.dto.response.AccountResponse;
@@ -115,5 +116,13 @@ public class AccountService {
         account.setPassword(password);
         accountRepository.save(account);
         return password;
+    }
+
+    public Boolean changePassword(PassWordRequest request) {
+        Account account = accountRepository.findById(request.getId()).orElseThrow(() -> new RuntimeException("User not found"));
+        String password = passwordEncoder.encode(request.getPassWord());
+        account.setPassword(password);
+        accountRepository.save(account);
+        return true;
     }
 }

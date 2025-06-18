@@ -5,23 +5,20 @@ import web.elearning.dto.response.LearnerResponse;
 import web.elearning.model.Account;
 import web.elearning.model.Learner;
 
-import java.math.BigDecimal;
 
 public class LearnerMapper {
     public static Learner addToLearner(LearnerRequest request, Account account) {
         Learner learner = new Learner();
         learner.setName(request.getName());
         learner.setAccount(account);
+        learner.setUrlImage(request.getUrlImage());
         learner.setCode("learnerCODE");
         learner.setRank(null);
-        learner.setTotalScore(new BigDecimal(request.getTotalScore()));
         return learner;
     }
 
-    public static Learner updateToLearner(LearnerRequest request, Long id) {
-        Learner learner = new Learner();
-        learner.setId(id);
-        learner.setCode("learnerCODE");
+    public static Learner updateToLearner(LearnerRequest request, Learner learner) {
+        learner.setUrlImage(request.getUrlImage());
         learner.setName(request.getName());
         return learner;
     }
@@ -37,9 +34,11 @@ public class LearnerMapper {
         }
         if (entity.getAccount() != null) {
             learner.setAccountName(entity.getAccount().getName());
+            learner.setAccountEmail(entity.getAccount().getEmail());
             learner.setAccountId(entity.getAccount().getId());
         }
         learner.setTotalScore(entity.getTotalScore());
+        learner.setUrlImage(entity.getUrlImage());
         return learner;
     }
 }

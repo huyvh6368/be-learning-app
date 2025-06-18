@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import web.elearning.dto.ResponseData;
 import web.elearning.dto.request.LearnerLevelRequest;
 import web.elearning.dto.response.LearnerLevelResponse;
+import web.elearning.dto.response.LevelResponse;
+import web.elearning.dto.response.TopicResponse;
 import web.elearning.service.LearnerLevelService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,5 +47,14 @@ public class LearnerLevelController {
                 "find all success",
                 response.getContent(),
                 response.getNumber(), response.getSize(), response.getTotalElements(), response.getTotalPages()));
+    }
+
+    @GetMapping("/findByLearner/{id}")
+    public ResponseEntity<?> getTopicsByLearner(@PathVariable Long id) {
+        List<LevelResponse> response = learnerLevelService.findAllByLearnerId(id);
+        return ResponseEntity.ok(new ResponseData<>(HttpStatus.OK.value(),
+                "find all success",
+                response,
+                null, null, null, null));
     }
 }
