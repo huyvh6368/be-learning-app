@@ -9,7 +9,6 @@ import web.elearning.model.Level;
 public class LearnerLevelMapper {
     public static LearnerLevel requestToEntity(LearnerLevelRequest request, Learner learner, Level level, String status) {
         LearnerLevel learnerLevel = new LearnerLevel();
-        learnerLevel.setId(learner.getId());
         learnerLevel.setLearner(learner);
         learnerLevel.setLevel(level);
         learnerLevel.setStatus(status);

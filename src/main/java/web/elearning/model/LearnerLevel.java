@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "tbl_level_learner")
+@Table(name = "tbl_learner_level")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
