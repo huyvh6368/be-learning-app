@@ -44,7 +44,8 @@ public class SecurityConfig {
             "/swagger-ui/index.html",
             "/api/v1/auth/**",
             "/api/v1/email/**",
-            "/api/images/**"
+            "/api/images/**",
+        "/api/health"
     };
     String[] admin = {
             "/admin/**"
